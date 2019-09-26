@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float initX;
     private float initZ;
 
-    private float gridSize = 0.5f;
+    private float gridSize = 1.5f;
     private float movePerFrame;
     private float gridOffset = 0;
 
@@ -94,19 +94,19 @@ public class PlayerMovement : MonoBehaviour
                 case EnumMovingDir.None:
                     break;
                 case EnumMovingDir.Left:
-                    n = transform.position.z - initZ;
+                    n = initX - transform.position.x;
                     m = n % gridSize;
                     break;
                 case EnumMovingDir.Right:
-                    n = initZ - transform.position.z;
-                    m = n % gridSize;
-                    break;
-                case EnumMovingDir.Up:
                     n = transform.position.x - initX;
                     m = n % gridSize;
                     break;
+                case EnumMovingDir.Up:
+                    n = transform.position.z - initZ;
+                    m = n % gridSize;
+                    break;
                 case EnumMovingDir.Down:
-                    n = initX - transform.position.x;
+                    n = initZ - transform.position.z;
                     m = n % gridSize;
                     break;
                 default:
