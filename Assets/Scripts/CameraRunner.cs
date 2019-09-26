@@ -6,12 +6,12 @@ public class CameraRunner : MonoBehaviour
 {
     [SerializeField]
     private Transform player;
-    private float minPosition = 11.0f;
-    private float maxPosition = -43.0f;
+    private float minPosition = -25.0f;
+    private float maxPosition = 25f;
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(player.position.z, maxPosition, minPosition));
+        transform.position = new Vector3(Mathf.Clamp(player.position.x, minPosition, maxPosition), transform.position.y, transform.position.z);
     }
 }

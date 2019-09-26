@@ -38,49 +38,49 @@ public class PlayerMovement : MonoBehaviour
         positionX = transform.position.x;
         positionZ = transform.position.z;
 
-        if (Input.GetKey("left")) // z+
+        if (Input.GetKey("left")) // z+ -> x-
         {
             movingDir = EnumMovingDir.Left;
             if (firstMove)
             {
                 firstMove = false;
-                initZ = transform.position.z;
+                initX = transform.position.x;
             }
 
-            positionZ += 0.01f * speed;
+            positionX -= movePerFrame;
         }
-        else if (Input.GetKey("up")) // x+
+        else if (Input.GetKey("up")) // x+ -> z+
         {
             movingDir = EnumMovingDir.Up;
             if (firstMove)
             {
                 firstMove = false;
-                initX = transform.position.x;
+                initZ = transform.position.z;
             }
 
-            positionX += 0.01f * speed;
+            positionZ += movePerFrame;
         }
-        else if (Input.GetKey("down")) // x- 
+        else if (Input.GetKey("down")) // x- -> z-
         {
             movingDir = EnumMovingDir.Down;
-            if (firstMove)
-            {
-                firstMove = false;
-                initX = transform.position.x;
-            }
-
-            positionX -= 0.01f * speed;
-        }
-        else if (Input.GetKey("right")) // z-
-        {
-            movingDir = EnumMovingDir.Right;
             if (firstMove)
             {
                 firstMove = false;
                 initZ = transform.position.z;
             }
 
-            positionZ -= 0.01f * speed;
+            positionZ -= movePerFrame;
+        }
+        else if (Input.GetKey("right")) // z- -> x+
+        {
+            movingDir = EnumMovingDir.Right;
+            if (firstMove)
+            {
+                firstMove = false;
+                initX = transform.position.x;
+            }
+
+            positionX += movePerFrame;
         }
 
         if (Input.GetKeyUp("right") || Input.GetKeyUp("left") || Input.GetKeyUp("up") || Input.GetKeyUp("down"))
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
                 case EnumMovingDir.None:
                     break;
                 case EnumMovingDir.Left:
-                    positionZ += movePerFrame;
+                    positionX -= movePerFrame;
                     gridOffset = gridOffset - movePerFrame;
                     //Debug.Log("movePerFrame " + movePerFrame);
                     //Debug.Log("left to walk " + gridOffset);
@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                     break;
                 case EnumMovingDir.Right:
-                    positionZ -= movePerFrame;
+                    positionX += movePerFrame;
                     gridOffset = gridOffset - movePerFrame;
                     if(gridOffset <= 0)
                     {
@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                     break;
                 case EnumMovingDir.Up:
-                    positionX += movePerFrame;
+                    positionZ += movePerFrame;
                     gridOffset = gridOffset - movePerFrame;
                     //Debug.Log("movePerFrame " + movePerFrame);
                     //Debug.Log("left to walk " + gridOffset);
@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                     break;
                 case EnumMovingDir.Down:
-                    positionX -= movePerFrame;
+                    positionZ -= movePerFrame;
                     gridOffset = gridOffset - movePerFrame;
                     if (gridOffset <= 0)
                     {
