@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField]
-    private float playerHealth = 10.0f;
+    public float playerHealth = 10.0f;
     [SerializeField]
     private Text UIHealth;
     [SerializeField]
@@ -23,6 +22,11 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnEnable()
+    {
+        UIHealth.text = "Health: " + playerHealth;
     }
 
     public void hurtPlayer(float hit)
