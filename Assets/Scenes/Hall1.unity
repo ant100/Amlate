@@ -420,6 +420,11 @@ PrefabInstance:
       propertyPath: UIHealth
       value: 
       objectReference: {fileID: 36484455}
+    - target: {fileID: 4570817812426411781, guid: ca2579c4d398f9a42a0a2ae394741b27,
+        type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca2579c4d398f9a42a0a2ae394741b27, type: 3}
 --- !u!4 &321510380 stripped
