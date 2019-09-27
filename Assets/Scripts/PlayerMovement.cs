@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-   // [SerializeField]
-    private float speed = 4.5f;
+    [SerializeField]
+    private float speed = 3.0f;
     private bool firstMove;
     private bool isAtSquare;
     private float positionX;

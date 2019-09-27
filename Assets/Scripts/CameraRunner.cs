@@ -6,8 +6,8 @@ public class CameraRunner : MonoBehaviour
 {
     [SerializeField]
     private Transform player;
-    private float minPosition = -25.0f;
-    private float maxPosition = 25f;
+    private float minPosition = -34.0f;
+    private float maxPosition = 34.0f;
 
     // Update is called once per frame
     void Update()
