@@ -137,3 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 10
+  UIHealth: {fileID: 0}
+  gameOverLevel: GameOver

@@ -1028,10 +1028,5 @@ PrefabInstance:
       propertyPath: UIHealth
       value: 
       objectReference: {fileID: 1432373485}
-    - target: {fileID: 8356702701652362800, guid: ca2579c4d398f9a42a0a2ae394741b27,
-        type: 3}
-      propertyPath: gameOverLevel
-      value: GameOver
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca2579c4d398f9a42a0a2ae394741b27, type: 3}
