@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     private float playerHealth = 10.0f;
     [SerializeField]
     private Text UIHealth;
+    [SerializeField]
+    private string gameOverLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
         if(playerHealth <= 0)
         {
             // player is death
-            Debug.Log("Player died!");
+            SceneManager.LoadScene(gameOverLevel);
         }
     }
 
