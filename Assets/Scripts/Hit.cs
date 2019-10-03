@@ -23,7 +23,8 @@ public class Hit : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             // hurts player
-            other.GetComponent<PlayerHealth>().hurtPlayer(hit);
+            other.GetComponentInParent<PlayerHealth>().hurtPlayer(hit);
+            //other.GetComponent<PlayerHealth>().hurtPlayer(hit);
         }
     }
 }

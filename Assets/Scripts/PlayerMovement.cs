@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private bool isAtSquare;
     private float positionX;
     private float positionZ;
-
     private float initX;
     private float initZ;
 
@@ -18,19 +17,25 @@ public class PlayerMovement : MonoBehaviour
     private float movePerFrame;
     private float gridOffset = 0;
 
+    private Animator animator;
+
+    private bool hitEnded = true;
+
     private enum EnumMovingDir { None, Left,Right, Up, Down};
     private EnumMovingDir movingDir;
 
     void Start()
     {
-        firstMove  = true;
-        isAtSquare = true;
+        animator     = GetComponent<Animator>();
+        firstMove    = true;
+        isAtSquare   = true;
         movePerFrame = 0.01f * speed;
     }
 
     void Update()
     {
-        movePlayer();
+        if (hitEnded)
+            movePlayer();
     }
 
     void movePlayer()
@@ -40,44 +45,56 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey("left")) // z+ -> x-
         {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, -90f, transform.rotation.z);
+            //animator.SetTrigger("Walking");
             movingDir = EnumMovingDir.Left;
             if (firstMove)
             {
                 firstMove = false;
                 initX = transform.position.x;
+                PlayAnimation();
             }
 
             positionX -= movePerFrame;
         }
         else if (Input.GetKey("up")) // x+ -> z+
         {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, transform.rotation.z);
+            //animator.SetTrigger("Walking");
             movingDir = EnumMovingDir.Up;
             if (firstMove)
             {
                 firstMove = false;
                 initZ = transform.position.z;
+                PlayAnimation();
             }
 
             positionZ += movePerFrame;
         }
         else if (Input.GetKey("down")) // x- -> z-
         {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, 180f, transform.rotation.z);
+            //animator.SetTrigger("Walking");
             movingDir = EnumMovingDir.Down;
             if (firstMove)
             {
                 firstMove = false;
                 initZ = transform.position.z;
+                PlayAnimation();
             }
 
             positionZ -= movePerFrame;
         }
         else if (Input.GetKey("right")) // z- -> x+
         {
+            //animator.SetTrigger("Walking");
+            transform.rotation = Quaternion.Euler(transform.rotation.x, 90f, transform.rotation.z);
             movingDir = EnumMovingDir.Right;
             if (firstMove)
             {
                 firstMove = false;
                 initX = transform.position.x;
+                PlayAnimation();
             }
 
             positionX += movePerFrame;
@@ -117,8 +134,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 isAtSquare = false;
             }
+            else
+            {
+                animator.ResetTrigger("Walking");
+                animator.SetTrigger("Idle");
+            }
             gridOffset = gridSize - m;
-            //Debug.Log("needs to walk " + gridOffset);
         }
 
         if(!isAtSquare)
@@ -130,11 +151,11 @@ public class PlayerMovement : MonoBehaviour
                 case EnumMovingDir.Left:
                     positionX -= movePerFrame;
                     gridOffset = gridOffset - movePerFrame;
-                    //Debug.Log("movePerFrame " + movePerFrame);
-                    //Debug.Log("left to walk " + gridOffset);
                     if (gridOffset <= 0)
                     {
                         isAtSquare = true;
+                        animator.ResetTrigger("Walking");
+                        animator.SetTrigger("Idle");
                     }
                     break;
                 case EnumMovingDir.Right:
@@ -143,6 +164,8 @@ public class PlayerMovement : MonoBehaviour
                     if(gridOffset <= 0)
                     {
                         isAtSquare = true;
+                        animator.ResetTrigger("Walking");
+                        animator.SetTrigger("Idle");
                     }
                     break;
                 case EnumMovingDir.Up:
@@ -153,6 +176,8 @@ public class PlayerMovement : MonoBehaviour
                     if (gridOffset <= 0)
                     {
                         isAtSquare = true;
+                        animator.ResetTrigger("Walking");
+                        animator.SetTrigger("Idle");
                     }
                     break;
                 case EnumMovingDir.Down:
@@ -161,6 +186,8 @@ public class PlayerMovement : MonoBehaviour
                     if (gridOffset <= 0)
                     {
                         isAtSquare = true;
+                        animator.ResetTrigger("Walking");
+                        animator.SetTrigger("Idle");
                     }
                     break;
                 default:
@@ -168,6 +195,23 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        transform.position = new Vector3(positionX, transform.position.y, positionZ);
+        Vector3 movement = new Vector3(positionX, transform.position.y, positionZ);
+        transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+        transform.position = movement;
+    }
+
+    private void EndHit()
+    {
+        hitEnded = true;
+    }
+
+    private void StartHit()
+    {
+        hitEnded = false;
+    }
+
+    private void PlayAnimation()
+    {
+        animator.SetTrigger("Walking");
     }
 }
