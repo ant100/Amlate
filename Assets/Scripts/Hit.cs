@@ -24,7 +24,6 @@ public class Hit : MonoBehaviour
         {
             // hurts player
             other.GetComponentInParent<PlayerHealth>().hurtPlayer(hit);
-            //other.GetComponent<PlayerHealth>().hurtPlayer(hit);
         }
     }
 }

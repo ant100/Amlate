@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 3.0f;
+    [SerializeField] private float speed = 3.0f;
+
     private bool firstMove;
     private bool isAtSquare;
     private float positionX;
@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float initX;
     private float initZ;
 
-    private float gridSize = 1.5f;
+    private float gridSize = 3f;
     private float movePerFrame;
     private float gridOffset = 0;
 
@@ -43,10 +43,9 @@ public class PlayerMovement : MonoBehaviour
         positionX = transform.position.x;
         positionZ = transform.position.z;
 
-        if (Input.GetKey("left")) // z+ -> x-
+        if (Input.GetKey("left") && !Input.GetKey("right") && !Input.GetKey("up") && !Input.GetKey("down")) // z+ -> x-
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, -90f, transform.rotation.z);
-            //animator.SetTrigger("Walking");
             movingDir = EnumMovingDir.Left;
             if (firstMove)
             {
@@ -57,10 +56,9 @@ public class PlayerMovement : MonoBehaviour
 
             positionX -= movePerFrame;
         }
-        else if (Input.GetKey("up")) // x+ -> z+
+        else if (Input.GetKey("up") && !Input.GetKey("right") && !Input.GetKey("left") && !Input.GetKey("down")) // x+ -> z+
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, transform.rotation.z);
-            //animator.SetTrigger("Walking");
             movingDir = EnumMovingDir.Up;
             if (firstMove)
             {
@@ -71,10 +69,9 @@ public class PlayerMovement : MonoBehaviour
 
             positionZ += movePerFrame;
         }
-        else if (Input.GetKey("down")) // x- -> z-
+        else if (Input.GetKey("down") && !Input.GetKey("right") && !Input.GetKey("up") && !Input.GetKey("left")) // x- -> z-
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, 180f, transform.rotation.z);
-            //animator.SetTrigger("Walking");
             movingDir = EnumMovingDir.Down;
             if (firstMove)
             {
@@ -85,11 +82,11 @@ public class PlayerMovement : MonoBehaviour
 
             positionZ -= movePerFrame;
         }
-        else if (Input.GetKey("right")) // z- -> x+
+        else if (Input.GetKey("right") && !Input.GetKey("left") && !Input.GetKey("up") && !Input.GetKey("down")) // z- -> x+
         {
-            //animator.SetTrigger("Walking");
             transform.rotation = Quaternion.Euler(transform.rotation.x, 90f, transform.rotation.z);
             movingDir = EnumMovingDir.Right;
+
             if (firstMove)
             {
                 firstMove = false;
@@ -98,6 +95,19 @@ public class PlayerMovement : MonoBehaviour
             }
 
             positionX += movePerFrame;
+        }
+        else if((!Input.GetKey("left")  && !Input.GetKey("right"))  || (Input.GetKey("left") && Input.GetKey("right"))  ||
+                (!Input.GetKey("left")  && !Input.GetKey("up"))     || (Input.GetKey("left") && Input.GetKey("up"))     ||
+                (!Input.GetKey("left")  && !Input.GetKey("down"))   || (Input.GetKey("left") && Input.GetKey("down"))   ||
+                (!Input.GetKey("right") && !Input.GetKey("up"))     || (Input.GetKey("left") && Input.GetKey("up"))     ||
+                (!Input.GetKey("left")  && !Input.GetKey("down"))   || (Input.GetKey("left") && Input.GetKey("down"))   ||
+                (!Input.GetKey("up")    && !Input.GetKey("down"))   || (Input.GetKey("up")   && Input.GetKey("down")))
+        {
+            if (movingDir == EnumMovingDir.None) return;
+
+            movingDir = EnumMovingDir.None;
+            animator.SetTrigger("Idle");
+            firstMove = true;
         }
 
         if (Input.GetKeyUp("right") || Input.GetKeyUp("left") || Input.GetKeyUp("up") || Input.GetKeyUp("down"))
@@ -136,7 +146,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                animator.ResetTrigger("Walking");
                 animator.SetTrigger("Idle");
             }
             gridOffset = gridSize - m;
@@ -154,7 +163,6 @@ public class PlayerMovement : MonoBehaviour
                     if (gridOffset <= 0)
                     {
                         isAtSquare = true;
-                        animator.ResetTrigger("Walking");
                         animator.SetTrigger("Idle");
                     }
                     break;
@@ -164,19 +172,15 @@ public class PlayerMovement : MonoBehaviour
                     if(gridOffset <= 0)
                     {
                         isAtSquare = true;
-                        animator.ResetTrigger("Walking");
                         animator.SetTrigger("Idle");
                     }
                     break;
                 case EnumMovingDir.Up:
                     positionZ += movePerFrame;
                     gridOffset = gridOffset - movePerFrame;
-                    //Debug.Log("movePerFrame " + movePerFrame);
-                    //Debug.Log("left to walk " + gridOffset);
                     if (gridOffset <= 0)
                     {
                         isAtSquare = true;
-                        animator.ResetTrigger("Walking");
                         animator.SetTrigger("Idle");
                     }
                     break;
@@ -186,11 +190,8 @@ public class PlayerMovement : MonoBehaviour
                     if (gridOffset <= 0)
                     {
                         isAtSquare = true;
-                        animator.ResetTrigger("Walking");
                         animator.SetTrigger("Idle");
                     }
-                    break;
-                default:
                     break;
             }
         }

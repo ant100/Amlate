@@ -7,10 +7,9 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     private float shootForce = 1000;
     [SerializeField]
-    private GameObject bullet;
+    private GameObject bullet = null;
     [SerializeField]
-    private GameObject player;
-    private Rigidbody rb;
+    private GameObject player = null;
 
     void Start()
     {
