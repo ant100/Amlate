@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    [SerializeField]
-    private float shootForce = 1000;
-    [SerializeField]
-    private GameObject bullet = null;
-    [SerializeField]
-    private GameObject player = null;
+    [SerializeField] private float shootForce = 1000;
+    [SerializeField] private GameObject bullet = null;
+    [SerializeField] private Transform player = null;
+    [SerializeField] private float spawningTime = 1.5f;
 
     void Start()
     {
-        InvokeRepeating("ShootBullet", 1f, 1f);
+        InvokeRepeating("ShootBullet", 1f, spawningTime);
     }
 
     void ShootBullet() 
     {
-        GameObject bulletObj2 = Instantiate(bullet, transform.position, Quaternion.identity);
-        bulletObj2.GetComponent<Rigidbody>().AddForce((player.GetComponent<Transform>().position - bulletObj2.GetComponent<Transform>().position).normalized * shootForce);
+        GameObject bulletObj = Instantiate(bullet, transform.position, Quaternion.identity);
+        bulletObj.GetComponent<Rigidbody>().AddForce((player.position - bulletObj.GetComponent<Transform>().position).normalized * shootForce);
     }
 }

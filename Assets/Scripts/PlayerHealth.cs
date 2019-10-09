@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(playerHealth <= 0)
         {
-            // player is death
+            // player is dead
             SceneManager.LoadScene(gameOverLevel);
         }
     }

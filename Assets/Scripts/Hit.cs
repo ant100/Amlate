@@ -6,7 +6,6 @@ public class Hit : MonoBehaviour
 {
     [SerializeField] private float hit = 1f;
 
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player") || other.CompareTag("Barrier"))
