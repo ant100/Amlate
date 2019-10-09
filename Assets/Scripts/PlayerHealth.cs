@@ -7,22 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     public float playerHealth = 10.0f;
-    [SerializeField]
-    private Text UIHealth;
-    [SerializeField]
-    private string gameOverLevel;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private Text UIHealth = null;
+    [SerializeField] private string gameOverLevel = null;
 
     private void OnEnable()
     {

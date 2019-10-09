@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Hit : MonoBehaviour
 {
-    [SerializeField]
-    private float hit;
+    [SerializeField] private float hit = 1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {

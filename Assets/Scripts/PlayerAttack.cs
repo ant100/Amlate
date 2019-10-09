@@ -6,8 +6,10 @@ public class PlayerAttack : MonoBehaviour
 {
     //[SerializeField]
     //private float punchAttackForce = 1f;
+    [SerializeField] private string punchKey = "x";
     private Animator animator;
     private bool hitEnded = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,15 +26,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void DoAttack()
     {
-        if (Input.GetKey("x"))
+        if (Input.GetKey(punchKey))
         {
             // do animation
             animator.SetTrigger("Hit");
-        }
-
-        if (Input.GetKeyUp("x"))
-        {
-            animator.ResetTrigger("Hit");
         }
     }
 

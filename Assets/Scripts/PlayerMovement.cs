@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 3.0f;
+    [SerializeField] private string punchKey = "x";
 
     private bool firstMove;
     private bool isAtSquare;
@@ -43,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         positionX = transform.position.x;
         positionZ = transform.position.z;
 
-        if (Input.GetKey("left") && !Input.GetKey("right") && !Input.GetKey("up") && !Input.GetKey("down")) // z+ -> x-
+        if (Input.GetKey("left") && !Input.GetKey("right") && !Input.GetKey("up") && !Input.GetKey("down") && !Input.GetKey(punchKey)) // z+ -> x-
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, -90f, transform.rotation.z);
             movingDir = EnumMovingDir.Left;
@@ -56,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
             positionX -= movePerFrame;
         }
-        else if (Input.GetKey("up") && !Input.GetKey("right") && !Input.GetKey("left") && !Input.GetKey("down")) // x+ -> z+
+        else if (Input.GetKey("up") && !Input.GetKey("right") && !Input.GetKey("left") && !Input.GetKey("down") && !Input.GetKey(punchKey)) // x+ -> z+
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, transform.rotation.z);
             movingDir = EnumMovingDir.Up;
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
             positionZ += movePerFrame;
         }
-        else if (Input.GetKey("down") && !Input.GetKey("right") && !Input.GetKey("up") && !Input.GetKey("left")) // x- -> z-
+        else if (Input.GetKey("down") && !Input.GetKey("right") && !Input.GetKey("up") && !Input.GetKey("left") && !Input.GetKey(punchKey)) // x- -> z-
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, 180f, transform.rotation.z);
             movingDir = EnumMovingDir.Down;
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
             positionZ -= movePerFrame;
         }
-        else if (Input.GetKey("right") && !Input.GetKey("left") && !Input.GetKey("up") && !Input.GetKey("down")) // z- -> x+
+        else if (Input.GetKey("right") && !Input.GetKey("left") && !Input.GetKey("up") && !Input.GetKey("down") && !Input.GetKey(punchKey)) // z- -> x+
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, 90f, transform.rotation.z);
             movingDir = EnumMovingDir.Right;
@@ -96,12 +97,13 @@ public class PlayerMovement : MonoBehaviour
 
             positionX += movePerFrame;
         }
-        else if((!Input.GetKey("left")  && !Input.GetKey("right"))  || (Input.GetKey("left") && Input.GetKey("right"))  ||
-                (!Input.GetKey("left")  && !Input.GetKey("up"))     || (Input.GetKey("left") && Input.GetKey("up"))     ||
-                (!Input.GetKey("left")  && !Input.GetKey("down"))   || (Input.GetKey("left") && Input.GetKey("down"))   ||
-                (!Input.GetKey("right") && !Input.GetKey("up"))     || (Input.GetKey("left") && Input.GetKey("up"))     ||
-                (!Input.GetKey("left")  && !Input.GetKey("down"))   || (Input.GetKey("left") && Input.GetKey("down"))   ||
-                (!Input.GetKey("up")    && !Input.GetKey("down"))   || (Input.GetKey("up")   && Input.GetKey("down")))
+        //else if((!Input.GetKey("left")  && !Input.GetKey("right"))  || (Input.GetKey("left") && Input.GetKey("right"))  ||
+        //        (!Input.GetKey("left")  && !Input.GetKey("up"))     || (Input.GetKey("left") && Input.GetKey("up"))     ||
+        //        (!Input.GetKey("left")  && !Input.GetKey("down"))   || (Input.GetKey("left") && Input.GetKey("down"))   ||
+        //        (!Input.GetKey("right") && !Input.GetKey("up"))     || (Input.GetKey("left") && Input.GetKey("up"))     ||
+        //        (!Input.GetKey("left")  && !Input.GetKey("down"))   || (Input.GetKey("left") && Input.GetKey("down"))   ||
+        //        (!Input.GetKey("up")    && !Input.GetKey("down"))   || (Input.GetKey("up")   && Input.GetKey("down")))
+        else
         {
             if (movingDir == EnumMovingDir.None) return;
 
@@ -204,6 +206,7 @@ public class PlayerMovement : MonoBehaviour
     private void EndHit()
     {
         hitEnded = true;
+        animator.SetTrigger("Idle");
     }
 
     private void StartHit()

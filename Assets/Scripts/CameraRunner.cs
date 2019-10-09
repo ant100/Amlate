@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CameraRunner : MonoBehaviour
 {
-    [SerializeField]
-    private Transform player;
+    [SerializeField] private Transform player = null;
     private float minPosition = -34.0f;
     private float maxPosition = 34.0f;
 

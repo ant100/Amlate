@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelChange : MonoBehaviour
 {
     [SerializeField]
-    private string nextLevel;
+    private string nextLevel = null;
 
     private void OnTriggerEnter(Collider other)
     {
