@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class Shooter : MonoBehaviour
 {
@@ -18,5 +19,7 @@ public class Shooter : MonoBehaviour
     {
         GameObject bulletObj = Instantiate(bullet, transform.position, Quaternion.identity);
         bulletObj.GetComponent<Rigidbody>().AddForce((player.position - bulletObj.GetComponent<Transform>().position).normalized * shootForce);
+        CameraShaker.Instance.ShakeOnce(1f, 5f, .1f, 1f);
+        //CameraShaker.Instance.StartShake(3f, 4f, .1f);
     }
 }
