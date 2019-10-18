@@ -10,6 +10,7 @@ public class BossHealth : MonoBehaviour
     [SerializeField] private PlayerAttack player = null;
     [SerializeField] private Text UIEnemyHealth = null;
     [SerializeField] private string winLevel = null;
+    [SerializeField] private ShaderEffect ShaderEffect = null;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +20,7 @@ public class BossHealth : MonoBehaviour
             if(player.isAttacking)
             {
                 HurtBoss(player.PunchForce);
+                StartCoroutine(ShaderEffect.BossShadeFX(0.1f));
             }
         }
     }
@@ -27,7 +29,6 @@ public class BossHealth : MonoBehaviour
     {
         bossHealth -= hit;
         UIEnemyHealth.text = "Enemy: " + bossHealth;
-        //Debug.Log("boss health: " + bossHealth);
         if (bossHealth <= 0)
         {
             // boss is dead

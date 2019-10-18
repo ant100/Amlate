@@ -500,24 +500,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1025007557}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &939703232 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7092170935338520254, guid: 7b8ab5699e9f4c64f9ae8557d583a244,
-    type: 3}
-  m_PrefabInstance: {fileID: 792813186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd8bd4807557584439c114f8892979e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &939703237 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6068365456478387369, guid: 7b8ab5699e9f4c64f9ae8557d583a244,
-    type: 3}
-  m_PrefabInstance: {fileID: 792813186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1020976250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -954,7 +936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.69146764, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1178,10 +1160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77bd11cb9abc6b54baf7a6ed3b9d5e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 800
+  shootForce: 20
   bullet: {fileID: 4476356589825317073, guid: 16718cfd615843d4b8d797f1219c90b8, type: 3}
-  player: {fileID: 939703237}
-  spawningTime: 2
+  player: {fileID: 6068365455928877611}
+  spawningTime: 1.5
+  numberOfProjectiles: 10
 --- !u!114 &1728934607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,9 +1178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossHealth: 5
-  player: {fileID: 939703232}
+  player: {fileID: 7092170935896281148}
   UIEnemyHealth: {fileID: 2095590499}
   winLevel: Hall2
+  ShaderEffect: {fileID: 0}
 --- !u!1 &1729185549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0.7064719, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1368,3 +1352,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095590497}
   m_CullTransparentMesh: 0
+--- !u!4 &6068365455928877611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6068365456478387369, guid: 7b8ab5699e9f4c64f9ae8557d583a244,
+    type: 3}
+  m_PrefabInstance: {fileID: 792813186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7092170935896281148 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7092170935338520254, guid: 7b8ab5699e9f4c64f9ae8557d583a244,
+    type: 3}
+  m_PrefabInstance: {fileID: 792813186}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8bd4807557584439c114f8892979e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

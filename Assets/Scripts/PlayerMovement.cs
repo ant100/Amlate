@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // agregar pausa
         if (hitEnded)
             movePlayer();
     }
