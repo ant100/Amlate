@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float initX;
     private float initZ;
 
+    private bool hi;
+
     private float gridSize = 3f;
     private float movePerFrame;
     private float gridOffset = 0;
